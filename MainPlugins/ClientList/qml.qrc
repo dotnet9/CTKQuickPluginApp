@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qml"/>
+    <qresource prefix="/">
+        <file>ClientListView.qml</file>
+    </qresource>
+</RCC>

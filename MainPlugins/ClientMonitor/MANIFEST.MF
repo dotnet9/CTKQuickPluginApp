@@ -1,0 +1,8 @@
+Plugin-SymbolicName: MainPlugin.ClientMonitor
+Plugin-ActivationPolicy: eager
+Plugin-Category: MainPlugin
+Plugin-ContactAddress: lsquange.com
+Plugin-Description: A plugin for client detail module
+Plugin-Name: ClientMonitor
+Plugin-Vendor: lsquange
+Plugin-Version: 1.0.0

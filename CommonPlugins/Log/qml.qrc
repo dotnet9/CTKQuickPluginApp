@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qml"/>
+    <qresource prefix="/">
+        <file>LogView.qml</file>
+    </qresource>
+</RCC>
