@@ -4,6 +4,7 @@
 #include "showclientplugineventhandler.h"
 #include "service/event/ctkEventConstants.h"
 #include <service/event/ctkEventAdmin.h>
+#include <QQmlEngine>
 
 void PluginActivator::start(ctkPluginContext *context)
 {
@@ -30,36 +31,35 @@ void PluginActivator::showPluginViewHandler(const int clientMark, const QString&
         return;
     }
 
-//    QObject* view = nullptr;
-//    if(m_mapViews.contains(clientMark)) {
-//        view = m_mapViews[clientMark];
-//        if(view == nullptr || view->isHidden()) {
-//            delete view;
-//            view = nullptr;
-//            m_mapViews.remove(clientMark);
-//        }
-//    }
-//    if(view == nullptr) {
-//        view = new ClientBaseView(clientMark);
-//        m_mapViews.insert(clientMark, view);
-//    }
+    QObject* view = nullptr;
+    if(m_mapViews.contains(clientMark)) {
+        view = m_mapViews[clientMark];
+    }
+    if(view == nullptr) {
+
+        QQmlEngine engine;
+        QQmlComponent component(&engine, QUrl("qrc:/ClientBaseView.qml"));
+        view = component.create();
+        m_mapViews.insert(clientMark, view);
+    }
 
 
-//    ctkServiceReference ref;
-//    ctkEventAdmin* eventAdmin;
-//    ref = m_pContext->getServiceReference<ctkEventAdmin>();
-//    if(ref)
-//    {
-//        eventAdmin = m_pContext->getService<ctkEventAdmin>(ref);
-//        m_pContext->ungetService(ref);
-//    }
+    ctkServiceReference ref;
+    ctkEventAdmin* eventAdmin;
+    ref = m_pContext->getServiceReference<ctkEventAdmin>();
+    if(ref)
+    {
+        eventAdmin = m_pContext->getService<ctkEventAdmin>(ref);
+        m_pContext->ungetService(ref);
 
-//    if(eventAdmin) {
-//        QString topic("com/lsquange/clientplugin/published");
-//        ctkDictionary message;
-//        message["ClientMark"] = clientMark;
-//        message["ClientPluginMark"] = clientPluginMark;
-//        message["View"] = QVariant::fromValue(view);
-//        eventAdmin->postEvent(ctkEvent(topic, message));
-//    }
+        if(eventAdmin) {
+            QString topic("com/lsquange/clientplugin/published");
+            ctkDictionary message;
+            message["ClientMark"] = clientMark;
+            message["ClientPluginMark"] = clientPluginMark;
+            message["View"] = QVariant::fromValue(view);
+            eventAdmin->postEvent(ctkEvent(topic, message));
+        }
+    }
+
 }

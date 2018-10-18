@@ -8,13 +8,15 @@ SOURCES += \
     pluginactivator.cpp \
     pluginimpl.cpp \
     showclientmonitoreventhandler.cpp \
-    clientmonitormodel.cpp
+    clientmonitormodel.cpp \
+    showclientplugineventhandler.cpp
 
 HEADERS += \
     pluginactivator.h \
     pluginimpl.h \
     showclientmonitoreventhandler.h \
-    clientmonitormodel.h
+    clientmonitormodel.h \
+    showclientplugineventhandler.h
 
 include(../../CTK.pri)
 INCLUDEPATH += ../../include

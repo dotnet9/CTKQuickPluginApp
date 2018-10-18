@@ -3,6 +3,7 @@
 #include <QQuickView>
 #include <QQmlContext>
 #include "showclientmonitoreventhandler.h"
+#include "showclientplugineventhandler.h"
 #include "service/event/ctkEventConstants.h"
 #include <ctkPluginFrameworkLauncher.h>
 #include "clientmonitormodel.h"
@@ -19,6 +20,15 @@ void PluginActivator::start(ctkPluginContext *context)
     ctkDictionary props;
     props[ctkEventConstants::EVENT_TOPIC] = "com/lsquange/client/published";
     context->registerService<ctkEventHandler>(m_pEventHandler, props);
+
+
+    m_pPluginEventHandler = new ShowClientPluginEventHandler();
+    connect(m_pPluginEventHandler, &ShowClientPluginEventHandler::showPluginView,
+            this, &PluginActivator::showPluginViewHandler);
+
+    ctkDictionary props2;
+    props2[ctkEventConstants::EVENT_TOPIC] = "com/lsquange/clientplugin/published";
+    context->registerService<ctkEventHandler>(m_pPluginEventHandler, props2);
 }
 
 void PluginActivator::stop(ctkPluginContext *context)
@@ -37,7 +47,9 @@ void PluginActivator::showMonitorViewHandler(const int clientMark)
 
         view = new QQuickView;
         QObject* logView = getView("CommonPlugin.Log");
+        QObject* clientBaseView = getView("ClientPlugin.ClientBase");
         view->rootContext()->setProperty("LogView", QVariant::fromValue(logView));
+        view->rootContext()->setProperty("ContentView", QVariant::fromValue(clientBaseView));
         view->setSource(QUrl("qrc:/ClientMonitorView.qml"));
         view->setTitle(QString("Client monitor %1").arg(clientMark));
         view->setWidth(800);
@@ -47,6 +59,18 @@ void PluginActivator::showMonitorViewHandler(const int clientMark)
 
     }
 }
+
+
+void PluginActivator::showPluginViewHandler(const int clientMark, const QString& clientPluginMark, QObject* view)
+{
+    QQuickView* monitorView = nullptr;
+    if(m_mapViews.contains(clientMark)) {
+        monitorView = m_mapViews[clientMark];
+    }
+
+    monitorView->rootContext()->setProperty("ContentView", QVariant::fromValue(view));
+}
+
 
 QObject* PluginActivator::getView(const QString& pluginName)
 {

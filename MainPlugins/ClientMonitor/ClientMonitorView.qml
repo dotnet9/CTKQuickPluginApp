@@ -39,10 +39,9 @@ Item {
                   }
               }
 
-              Rectangle {
+              ContentView {
                   Layout.fillWidth: true
                   height: parent.height
-                  color: "green"
               }
           }
 
