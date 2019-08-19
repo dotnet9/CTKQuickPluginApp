@@ -1,0 +1,41 @@
+﻿<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>StyleButton.qml</file>
+        <file>StyleCheckButton.qml</file>
+        <file>StyleWifi.qml</file>
+        <file>scene/View1.qml</file>
+        <file>scene/View2.qml</file>
+        <file>scene/View3.qml</file>
+        <file>scene/View6.qml</file>
+        <file>scene2/CodeKey.qml</file>
+        <file>scene2/EnKey.qml</file>
+        <file>scene2/NumberKey.qml</file>
+        <file>scene2/OtherKey.qml</file>
+        <file>scene2/View10.qml</file>
+        <file>scene2/View13.qml</file>
+        <file>scene2/View14.qml</file>
+        <file>scene2/View8.qml</file>
+        <file>scene3/View11.qml</file>
+        <file>scene3/View12.qml</file>
+        <file>scene3/View15.qml</file>
+        <file>scene3/View7.qml</file>
+        <file>scene3/View9.qml</file>
+        <file>skin/del.png</file>
+        <file>skin/lock.png</file>
+        <file>skin/logo.png</file>
+        <file>skin/progress.png</file>
+        <file>skin/wifi.png</file>
+        <file>skin/dl.png</file>
+        <file>skin/bluetooth.png</file>
+        <file>StylePower.qml</file>
+        <file>skin/ic_face.png</file>
+        <file>skin/btn_go.png</file>
+        <file>skin/ic_my.png</file>
+        <file>skin/ic_voice.png</file>
+        <file>skin/ic_ok.png</file>
+        <file>TopTool.qml</file>
+        <file>skin/top.png</file>
+        <file>skin/last.png</file>
+    </qresource>
+</RCC>
